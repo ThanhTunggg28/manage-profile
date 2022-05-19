@@ -1,6 +1,6 @@
 package net.sparkminds.profile.enumeration;
 
-public enum SubcriberSex {
+public enum Gender {
 	MALE,
 	FEMALE
 }

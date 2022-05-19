@@ -14,4 +14,8 @@ public interface SubscriberService {
 	void updateSubscriber(SubscriberRequestDto subscriberRequestDTO, Long id);
 
 	void deleteSubscriber(Long id);
+
+	List<SubscriberResponseDto> getSubscriberByBrandId(Long brandId);
+
+	List<SubscriberResponseDto> getSubscriberByGender(String sex);
 }

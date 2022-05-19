@@ -8,7 +8,7 @@ import javax.persistence.Enumerated;
 import lombok.Data;
 import lombok.Setter;
 import net.sparkminds.profile.entity.Brand;
-import net.sparkminds.profile.enumeration.SubcriberSex;
+import net.sparkminds.profile.enumeration.Gender;
 
 @Data
 @Setter
@@ -20,12 +20,14 @@ public class SubscriberRequestDto {
 	
 	private Brand brand;
 	
+	private Long profileId;
+	
 	private Long brandId;
 	
 	private Date dateOfBirth;
 	
 	@Enumerated(EnumType.STRING)
-	private SubcriberSex sex;
+	private Gender sex;
 
 	
 	

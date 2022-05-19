@@ -1,6 +1,5 @@
 package net.sparkminds.profile.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.sparkminds.profile.dto.BrandRequestDto;
+import net.sparkminds.profile.dto.BrandResponseDto;
 import net.sparkminds.profile.entity.Brand;
 import net.sparkminds.profile.repository.BrandRepository;
 import net.sparkminds.profile.service.BrandService;
@@ -22,15 +22,13 @@ public class BrandServiceImpl implements BrandService {
 
 	@Override
 	@Transactional
-	public Brand createBrand(BrandRequestDto brandRequestDto) {
-		// TODO Auto-generated method stub
-		Date currentDate = new Date();
+	public BrandResponseDto createBrand(BrandRequestDto brandRequestDTO) {
 		Brand brand = new Brand();
-		brand.setName(brandRequestDto.getName());
-		brand.setDescription(brandRequestDto.getDescription());
-		brand.setCreatedBy(brandRequestDto.getCreatedBy());
-		brand.setCreatedDate(currentDate);
-		return brandRepository.save(brand);
+		brand.setName(brandRequestDTO.getName());
+		brand.setDescription(brandRequestDTO.getDescription());
+		brandRepository.save(brand);
+		return BrandResponseDto.builder().name(brand.getName()).description(brand.getDescription())
+				.createdBy(brand.getCreatedBy()).createdDate(brand.getCreatedDate()).build();
 	}
 
 	@Override
@@ -40,14 +38,13 @@ public class BrandServiceImpl implements BrandService {
 
 	@Override
 	@Transactional
-	public void updateBrand(BrandRequestDto brandRequestDTO, Long id) {
-		Date currentDate = new Date();
+	public BrandResponseDto updateBrand(BrandRequestDto brandRequestDTO, Long id) {
 		Brand brand = brandRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Brand is not exist"));
 
 		brand.setName(brandRequestDTO.getName());
 		brand.setDescription(brandRequestDTO.getDescription());
-		brand.setCreatedBy(brandRequestDTO.getCreatedBy());
-		brand.setUpdatedDate(currentDate);
+		return BrandResponseDto.builder().name(brand.getName()).description(brand.getDescription())
+				.createdBy(brand.getCreatedBy()).createdDate(brand.getCreatedDate()).build();
 	}
 
 	@Override
@@ -56,13 +53,6 @@ public class BrandServiceImpl implements BrandService {
 		Brand brand = brandRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Brand is not exist"));
 
 		brandRepository.delete(brand);
-
-	}
-
-	@Override
-	public List<Brand> searchBrand(String keyword) {
-		return null;
-		
 	}
 
 }

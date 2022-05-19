@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.RequiredArgsConstructor;
 import net.sparkminds.profile.dto.BrandRequestDto;
+import net.sparkminds.profile.dto.BrandResponseDto;
 import net.sparkminds.profile.entity.Brand;
 import net.sparkminds.profile.service.BrandService;
 
@@ -35,9 +35,9 @@ public class BrandController {
 	};
 
 	@PostMapping
-	public ResponseEntity<Brand> createCategory(@RequestBody BrandRequestDto brandRequestDTO) {
-		Brand brand = brandService.createBrand(brandRequestDTO);
-		return ResponseEntity.ok(brand);
+	public ResponseEntity<BrandResponseDto> createCategory(@RequestBody BrandRequestDto brandRequestDTO) {
+		
+		return ResponseEntity.ok(brandService.createBrand(brandRequestDTO));
 	}
 
 	@PutMapping(value = "/{id}")

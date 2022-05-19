@@ -11,14 +11,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.sparkminds.profile.enumeration.SubcriberSex;
+import net.sparkminds.profile.enumeration.Gender;
 
 @Entity
 @Table(name="subcriber")
@@ -45,9 +44,14 @@ public class Subscriber {
 	@Column(name="birth_date")
 	private Date birthDate;
 	
-	@Column
+	@Column(name="gender")
+	@NotNull
 	@Enumerated(EnumType.STRING)
-	private SubcriberSex sex;
+	private Gender gender;
+	
+	@ManyToOne
+	@JoinColumn(name = "profile_id", referencedColumnName="id")
+    private Profile profile;
 
 	
 }
